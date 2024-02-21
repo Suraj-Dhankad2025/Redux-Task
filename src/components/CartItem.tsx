@@ -1,14 +1,28 @@
 import { MdDelete } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { remove  } from '../redux/slices/CartSlice';
-import  {toast}  from "react-hot-toast";
-const CartItem = ({ item, itemIndex }) => {
+import { remove } from '../redux/slices/CartSlice'; 
+import { toast } from "react-hot-toast";
 
+interface CartItem {
+  id: string; 
+  title: string;
+  description: string;
+  images: string[];
+  price: number;
+}
+interface CartItemProps {
+  item: CartItem; 
+  itemIndex: number;
+}
+
+const CartItem: React.FC<CartItemProps> = ({ item, itemIndex }) => {
   const dispatch = useDispatch();
-  const removeFromCart=()=>{
+
+  const removeFromCart = () => {
     dispatch(remove(item.id));
     toast.success("Item Removed");
   }
+
   return (
     <div className="flex items-center p-5 justify-between mt-2 mb-2 mx-5 border-b-[3px] border-slate-500">
       <div className="flex flex-row items-center gap-3 p-3 justify-center">
@@ -20,7 +34,7 @@ const CartItem = ({ item, itemIndex }) => {
           <p className="text-base text-slate-700 font-medium">{item.description.split(" ").slice(0, 10).join(" ") + "..."}</p>
           <div className="flex flex-row justify-between">
             <p className="text-green-600 font-bold text-lg">${item.price}</p>
-            <button className="text-red-800  bg-red-200 group hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-3 mr-3" onClick={removeFromCart}>
+            <button className="text-red-800 bg-red-200 group hover:bg-red-400 transition-transform duration-300 cursor-pointer rounded-full p-3 mr-3" onClick={removeFromCart}>
               <MdDelete/>
             </button>
           </div>

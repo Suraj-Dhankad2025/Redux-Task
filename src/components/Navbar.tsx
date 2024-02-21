@@ -8,7 +8,7 @@ import { setQuery } from '../redux/slices/SearchSlice';
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state:any) => state.cart);
   const [searchQuery, setSearchQuery] = useState('');
   
   const handleHome = () => {
